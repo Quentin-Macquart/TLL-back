@@ -1,0 +1,1125 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Last Legend Project API Swagger",
+    "version": "0.0.2",
+    "title": "The Last Legend"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "DummyComponent",
+      "x-resource": true
+    },
+    {
+      "name": "Legend",
+      "x-resource": true
+    },
+    {
+      "name": "Summoner",
+      "x-resource": true
+    },
+    {
+      "name": "Party",
+      "x-resource": true
+    }
+  ],
+  "paths": {
+    "/DummyPath/{id}": {
+      "get": {
+        "operationId": "*Controller method's name* > getData",
+        "summary": "Get DATA from DummyPath",
+        "description": " *description* ",
+        "tags": ["DummyComponent"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of DATA",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDataResponseFormat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No data found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "*Controller method's name* > addData",
+        "summary": "Add DATA from PATH",
+        "description": " *description* ",
+        "tags": ["DummyComponent"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of DATA",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDataSentFormat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "*Controller method's name* > addData",
+        "summary": "Add DATA from DummyPath",
+        "description": " *description* ",
+        "tags": ["DummyComponent"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of DATA",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putSentDataFormat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "*Controller method's name* > deleteData",
+        "summary": "Delete DATA from PATH",
+        "description": " *description* ",
+        "tags": ["DummyComponent"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of DATA",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/legends": {
+      "get": {
+        "operationId": "findLegends",
+        "summary": "Get Legends from /legends",
+        "description": "Obtain all legends information by consulting this endpoint",
+        "tags": ["Legend"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Legend"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No legend found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/legends/{id}": {
+      "get": {
+        "operationId": "findLegendById",
+        "summary": "Get one legend from /legends/:id",
+        "description": "Obtain one legend information using its own id",
+        "tags": ["Legend"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of the legend",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Legend"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No legend found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summoners": {
+      "get": {
+        "operationId": "findSummoners",
+        "summary": "Get Legends from /summoners",
+        "description": "Obtain all summoners information by consulting this endpoint",
+        "tags": ["Summoner"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Summoner"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No legend found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summoners/{id}": {
+      "get": {
+        "operationId": "findSummonerById",
+        "summary": "Get one legend from /summoners/:id",
+        "description": "Obtain one legend information using its own id",
+        "tags": ["Summoner"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Current id of the summoner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Summoner"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No legend found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/party": {
+      "get": {
+        "operationId": "findParty",
+        "summary": "Get current  party from /party",
+        "description": "Get all party info",
+        "tags": ["Party"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Party"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No data found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createParty",
+        "summary": "Create party with /party",
+        "description": "Create board game and join it summoners and party config in database",
+        "tags": ["Party"],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartyConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateParty",
+        "summary": "Update party with /party",
+        "description": "Update party data",
+        "tags": ["Party"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Id of the current party",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Party"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/party/stat-update": {
+      "put": {
+        "operationId": "updateStatistics",
+        "summary": "Update character statistics",
+        "description": "Update character(s) stats",
+        "tags": ["Party"],
+        "parameters": [
+          {
+            "name": "partyId",
+            "in": "query",
+            "description": "Id of the current party",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatsChanges"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "securitySchemes": {
+      "httpBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "description": "The identifier of the resource.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "skip": {
+        "name": "skip",
+        "in": "query",
+        "description": "How many documents to skip",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "The maximum number of documents to send",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "count": {
+        "name": "count",
+        "in": "query",
+        "description": "Set to true to return count instead of documents",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "conditions": {
+        "name": "conditions",
+        "in": "query",
+        "description": "Set the conditions used to find or remove the document(s)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "sort": {
+        "name": "sort",
+        "in": "query",
+        "description": "Set the fields by which to sort",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "distinct": {
+        "name": "distinct",
+        "in": "query",
+        "description": "Set to a path name to retrieve an array of distinct values",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "hint": {
+        "name": "hint",
+        "in": "query",
+        "description": "Add an index hint to the query (must be enabled per controller)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "comment": {
+        "name": "comment",
+        "in": "query",
+        "description": "Add a comment to a query (must be enabled per controller)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "select": {
+        "name": "select",
+        "in": "query",
+        "description": "Select which paths will be returned by the query)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "populate": {
+        "name": "populate",
+        "in": "query",
+        "description": "Specify which paths to populate. [doc](https://github.com/wprl/baucis/wiki/Query-String-Parameters#populate)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "X-Baucis-Update-Operator": {
+        "name": "X-Baucis-Update-Operator",
+        "in": "header",
+        "description": "**BYPASSES VALIDATION** May be used with PUT to update the document\nusing $push, $pull, or $set. [doc](https://github.com/wprl/baucis/wiki/HTTP-Headers)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "required": ["name", "status", "statusCode", "externalStatusCode", "message"],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "GetDataResponseFormat": {
+        "type": "object",
+        "properties": {
+          "dummyValue1": {
+            "type": "string"
+          },
+          "dummyValue2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dummyValue3": {
+            "type": "string",
+            "format": "date"
+          },
+          "dummyValue4": {
+            "type": "array",
+            "items": {
+              "$ref": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "PostDataSentFormat": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "dummyValue1": {
+            "type": "string"
+          },
+          "dummyValue2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dummyValue3": {
+            "type": "string",
+            "format": "date"
+          },
+          "dummyValue4": {
+            "type": "array",
+            "items": {
+              "$ref": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "putDataSentFormat": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "dummyValue1": {
+            "type": "string"
+          },
+          "dummyValue2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dummyValue3": {
+            "type": "string",
+            "format": "date"
+          },
+          "dummyValue4": {
+            "type": "array",
+            "items": {
+              "$ref": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "Summoner": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "malePic": {
+            "type": "string"
+          },
+          "femalePic": {
+            "type": "string"
+          },
+          "jewelPic": {
+            "type": "string"
+          },
+          "currPosition": {
+            "type": "string"
+          },
+          "isTurningPhase": {
+            "type": "boolean"
+          },
+          "legacyEnergy": {
+            "type": "number"
+          },
+          "currAA": {
+            "type": "number"
+          },
+          "currTA": {
+            "type": "number"
+          },
+          "legacyEnergyRegenPerTurn": {
+            "type": "number"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Skill"
+            }
+          },
+          "summon": {
+            "$ref": "#/components/schemas/Legend"
+          }
+        }
+      },
+      "Legend": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "shortcut": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "number"
+          },
+          "order": {
+            "type": "string"
+          },
+          "lore": {
+            "type": "string"
+          },
+          "picStart": {
+            "type": "string"
+          },
+          "picReveal": {
+            "type": "string"
+          },
+          "picVictory": {
+            "type": "string"
+          },
+          "passive": {
+            "type": "string"
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sex": {
+            "type": "string"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stats"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Skill"
+            }
+          }
+        }
+      },
+      "Stats": {
+        "currentJR": {
+          "type": "number"
+        },
+        "JRperTurn": {
+          "type": "number"
+        },
+        "JRrecieve": {
+          "type": "number"
+        },
+        "pv": {
+          "type": "number"
+        },
+        "att": {
+          "type": "number"
+        },
+        "def": {
+          "type": "number"
+        },
+        "ardeur": {
+          "type": "number"
+        },
+        "vit": {
+          "type": "number"
+        },
+        "critPercent": {
+          "type": "number"
+        },
+        "degCrit": {
+          "type": "number"
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "nbTurn": {
+            "type": "number"
+          }
+        }
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "cd": {
+            "type": "number"
+          },
+          "recup": {
+            "type": "number"
+          },
+          "coeff": {
+            "type": "number"
+          },
+          "addCost": {
+            "type": "number"
+          },
+          "effect": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "givingStatus": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "recievingStatus": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "cost": {
+            "$ref": "#/components/schemas/Cost"
+          }
+        }
+      },
+      "Cost": {
+        "type": "object",
+        "properties": {
+          "LE": {
+            "type": "number"
+          },
+          "TA": {
+            "type": "boolean"
+          },
+          "AA": {
+            "type": "boolean"
+          },
+          "actionNb": {
+            "type": "number"
+          }
+        }
+      },
+      "Square": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "occupied": {
+            "type": "boolean"
+          },
+          "onFight": {
+            "type": "boolean"
+          },
+          "selectable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Party": {
+        "type": "object",
+        "properties": {
+          "nbPlayers": {
+            "type": "number"
+          },
+          "partyBoard": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Square"
+            }
+          },
+          "partySummoners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Summoner"
+            }
+          },
+          "turnNb": {
+            "type": "number"
+          },
+          "turnToPlay": {
+            "type": "string"
+          }
+        }
+      },
+      "PartyConfig": {
+        "type": "object",
+        "properties": {
+          "nbPlayers": {
+            "type": "number"
+          },
+          "boardConfig": {
+            "type": "object",
+            "properties": {
+              "lines": {
+                "type": "number"
+              },
+              "columns": {
+                "type": "number"
+              }
+            }
+          },
+          "summoners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Summoner"
+            }
+          },
+          "turnNb": {
+            "type": "number"
+          },
+          "turnToPlay": {
+            "type": "string"
+          }
+        }
+      },
+      "Injury": {
+        "type": "object",
+        "properties": {
+          "giveStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusConfig"
+            }
+          },
+          "damages": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "Benefit": {
+        "type": "object",
+        "properties": {
+          "receiveStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusConfig"
+            }
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "StatusConfig": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "StatsChanges": {
+        "type": "object",
+        "properties": {
+          "isLegendSkill": {
+            "type": "boolean"
+          },
+          "from": {
+            "type": "number"
+          },
+          "skillNumb": {
+            "type": "number"
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "injuries": {
+            "type": "object",
+            "$ref": "#/components/schemas/Injury"
+          },
+          "benefits": {
+            "type": "object",
+            "$ref": "#/components/schemas/Benefit"
+          }
+        }
+      },
+      "security": [
+        {
+          "httpBearer": []
+        }
+      ]
+    }
+  }
+}
