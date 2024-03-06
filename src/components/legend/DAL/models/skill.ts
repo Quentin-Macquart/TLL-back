@@ -13,7 +13,7 @@ export interface Skill {
   type: string;
   desc: string;
   cd: number;
-  recup: number;
+  recov: number;
   coeff: null;
   addCost: null;
   effect: string[];

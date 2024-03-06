@@ -2,13 +2,13 @@ export interface Stats {
   currentJR: number;
   JRperTurn: number;
   JRrecieve: number;
-  pv: number;
+  lifepoints: number;
   att: number;
   def: number;
-  ardeur: number;
-  vit: number;
+  readiness: number;
+  speed: number;
   critPercent: number;
-  degCrit: number;
+  critDmg: number;
 }
 
 export interface StatusConfig {

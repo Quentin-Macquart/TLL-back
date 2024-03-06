@@ -871,7 +871,7 @@
         "JRrecieve": {
           "type": "number"
         },
-        "pv": {
+        "lifepoints": {
           "type": "number"
         },
         "att": {
@@ -880,16 +880,16 @@
         "def": {
           "type": "number"
         },
-        "ardeur": {
+        "readiness": {
           "type": "number"
         },
-        "vit": {
+        "speed": {
           "type": "number"
         },
         "critPercent": {
           "type": "number"
         },
-        "degCrit": {
+        "critDmg": {
           "type": "number"
         }
       },
@@ -922,7 +922,7 @@
           "cd": {
             "type": "number"
           },
-          "recup": {
+          "recov": {
             "type": "number"
           },
           "coeff": {
