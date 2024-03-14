@@ -1104,14 +1104,6 @@
             "items": {
               "type": "number"
             }
-          },
-          "injuries": {
-            "type": "object",
-            "$ref": "#/components/schemas/Injury"
-          },
-          "benefits": {
-            "type": "object",
-            "$ref": "#/components/schemas/Benefit"
           }
         }
       },

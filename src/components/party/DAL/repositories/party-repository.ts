@@ -55,16 +55,17 @@ export class PartyRepository implements IParty {
     return this.partyApi.update(id, body);
   }
 
-  /** Update Party
+  /**
+   * Update Party Statistics
    *
-   * @param {string} id
-   * @param {any} body
-   * @returns {Promise<any>}
+   * @param {string} id - The party ID.
+   * @param {DynamicStatistics} body - The statistics to update.
+   * @returns {Promise<Party>} - The updated party.
    */
-  public async updateStatistics(id: string, body: DynamicStatistics) {
+  public async updateStatistics(id: string, body: DynamicStatistics): Promise<Party> {
     const currParty: Party = await this.findPartyById(id);
-    const summonersUpdated: Summoner[] = this.partyFactory.manageStatistics(currParty, body);
-    return this.partyApi.update(id, summonersUpdated);
+    this.partyFactory.manageStatistics(currParty, body);
+    return this.partyApi.update(id, currParty);
   }
 
   /** Del Party

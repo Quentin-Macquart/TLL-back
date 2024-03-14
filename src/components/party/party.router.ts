@@ -1,7 +1,4 @@
 import TYPES from '@app/shared/container/types';
-import { NextFunction, Request, Response } from 'express';
-import { inputValidator } from '@app/shared/middleware';
-import { rules } from '@app/components/dummyComponent/DAL/models/rules/dummy.rules';
 import container from '@app/shared/container/container';
 import { PartyController } from '@app/components/party/controller/party.controller';
 

@@ -15,6 +15,4 @@ export interface DynamicStatistics {
   from: number;
   skillNumb: number;
   to: number[];
-  injuries?: Injury;
-  benefits?: Benefit;
 }
