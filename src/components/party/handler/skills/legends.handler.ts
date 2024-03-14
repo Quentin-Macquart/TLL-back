@@ -10,12 +10,16 @@ export class LegendsSkillsHandler {
   }
 
   activate(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill) {
-    const legendSkillCombine: string = `${correspSummoners.emittor.summon.id}:${skill.number}`;
+    const { emittor } = correspSummoners;
+    const legendSkillCombine: string = `${emittor.summon.id}:${skill.number}`;
+
     switch (legendSkillCombine) {
       // Legend 1
       case '1:1':
+        this.skillCalculator.applicateSkillToAllReceptors(correspSummoners, skill, 'case-number');
         break;
       case '1:2':
+        this.skillCalculator.applicateSkillToAllReceptors(correspSummoners, skill);
         break;
       case '1:3':
         break;
@@ -62,7 +66,7 @@ export class LegendsSkillsHandler {
 
       // Legend 7
       case '7:1':
-        this.skillCalculator.dmgTo(correspSummoners, skill);
+        this.skillCalculator.applicateSkillToAllReceptors(correspSummoners, skill);
         break;
       case '7:2':
         break;
@@ -73,7 +77,7 @@ export class LegendsSkillsHandler {
       case '8:1':
         break;
       case '8:2':
-        this.skillCalculator.dmgTo(correspSummoners, skill);
+        this.skillCalculator.applicateSkillToAllReceptors(correspSummoners, skill);
         break;
       case '8:3':
         break;

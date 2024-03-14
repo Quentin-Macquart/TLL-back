@@ -7,10 +7,39 @@ export class SkillCalculator {
    *
    * @param correspSummoners
    */
-  dmgTo(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill): void {
-    const { emittor, receptors } = correspSummoners;
-    receptors.forEach((receptor: Summoner) => {
-      receptor.summon.stats.lifepoints -= emittor.summon.stats.att * skill.coeff - receptor.summon.stats.def;
+  dmgTo(emittor: Summoner, receptor: Summoner, skill: Skill, dmgType?: string): void {
+    // TESTING PART TO REMOVE AFTER JUDGING OK
+    emittor.currPosition = 'A8';
+    receptor.summon.stats.lifepoints = 5000;
+
+    switch (dmgType) {
+      // Applicate damage to receptor in terms of the current number of the case
+      case 'case-number':
+        receptor.summon.stats.lifepoints -=
+          skill.coeff * emittor.summon.stats.att * parseInt(emittor.currPosition.split('')[1], 10) -
+          receptor.summon.stats.def;
+        break;
+      // No special effect, regular damage
+      default:
+        receptor.summon.stats.lifepoints -=
+          emittor.summon.stats.att * skill.coeff - receptor.summon.stats.def;
+    }
+  }
+
+  /**
+   *
+   * @param correspSummoners
+   * @param skill
+   * @param dmgType
+   */
+  applicateSkillToAllReceptors(
+    correspSummoners: { emittor: Summoner; receptors: Summoner[] },
+    skill: Skill,
+    dmgType?: string,
+  ) {
+    const { emittor } = correspSummoners;
+    correspSummoners.receptors.forEach((receptor: Summoner) => {
+      this.dmgTo(emittor, receptor, skill, dmgType);
     });
   }
 
@@ -36,5 +65,12 @@ export class SkillCalculator {
     skillUsed: Skill,
   ) {
     // Implement receiving status logic
+  }
+
+  updateLegacyEnergy(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill) {
+    const { receptors } = correspSummoners;
+    receptors.forEach((receptor: Summoner) => {
+      receptor.summon.stats.lifepoints -= emittor.summon.stats.att * skill.coeff - receptor.summon.stats.def;
+    });
   }
 }
