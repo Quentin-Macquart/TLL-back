@@ -12,7 +12,7 @@ export interface Legend {
   picReveal: string;
   picVictory: string;
   passive: string;
-  status: string[];
+  status: { status: string; turnsLeft: number }[];
   sex: string;
   stats: Stats;
   skills: Skill[];
