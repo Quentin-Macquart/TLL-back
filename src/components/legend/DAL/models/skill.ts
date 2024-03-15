@@ -15,7 +15,7 @@ export interface Skill {
   cd: number;
   recov: number;
   coeff: number;
-  addCost: null;
+  addCost: number;
   effect: string[];
   givingStatus: StatusConfig;
   recievingStatus: StatusConfig;

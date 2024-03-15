@@ -5,7 +5,6 @@ import { PartyFactory } from '@app/components/party/DAL/factories/party-factory'
 import { IParty } from '@app/components/party/DAL/interfaces/party-interface';
 import { PartyApi } from '@app/components/party/DAL/request/party-request';
 import { DynamicStatistics, Party, PartyConfig } from '@app/components/party/DAL/models';
-import { Summoner } from '@app/components/summoner/DAL/models';
 
 @injectable()
 export class PartyRepository implements IParty {

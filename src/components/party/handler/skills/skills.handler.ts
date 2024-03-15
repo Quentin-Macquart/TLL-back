@@ -1,23 +1,10 @@
-import { logger } from '@app/shared/utils/logger';
+import { LegendSkills, LegendFactory } from '@app/components/party/handler';
 import { Summoner } from '@app/components/summoner/DAL/models';
 import { Skill } from '@app/components/legend/DAL/models';
-import { DynamicStatistics, Party } from '@app/components/party/DAL/models';
-import { SkillCalculator } from './skills.calculator';
-import { LegendsSkillsHandler } from './legends.handler';
+import { DynamicStatistics } from '@app/components/party/DAL/models';
+import { logger } from '@app/shared/utils/logger';
 
 export class SkillsHandler {
-  private readonly skillCalculator: SkillCalculator;
-
-  private readonly legendSkill: LegendsSkillsHandler;
-
-  // private readonly summonerSkill: SummonerSkillsHandler;
-
-  constructor() {
-    this.skillCalculator = new SkillCalculator();
-    this.legendSkill = new LegendsSkillsHandler(this.skillCalculator);
-    // this.summonerSkill = new SummonerSkillsHandler(this.skillCalculator)
-  }
-
   /**
    * Manages the activation of skills for the emittor and applies effects to the receptors based on the dynamic statistics provided. This function determines which skill is used by the emittor, logs the skill usage, and activates the appropriate effects on the emittor and receptors.
    *
@@ -35,7 +22,8 @@ export class SkillsHandler {
     if (skillUsed) {
       this.logSkillUsage(correspSummoners.emittor, skillUsed);
       if (isLegendSkill) {
-        this.legendSkill.activate(correspSummoners, skillUsed);
+        const legendSkills: LegendSkills = LegendFactory.createLegend(correspSummoners.emittor.summon.id);
+        legendSkills.castSkill(correspSummoners, skillUsed);
       } else {
         // this.summonerSkill.activate(correspSummoners, skillUsed);
       }

@@ -9,7 +9,7 @@ export class SkillCalculator {
    */
   dmgTo(emittor: Summoner, receptor: Summoner, skill: Skill, dmgType?: string): void {
     // TESTING PART TO REMOVE AFTER JUDGING OK
-    emittor.currPosition = 'A8';
+    emittor.currPosition = 'A1';
     receptor.summon.stats.lifepoints = 5000;
 
     switch (dmgType) {
@@ -67,10 +67,8 @@ export class SkillCalculator {
     // Implement receiving status logic
   }
 
-  updateLegacyEnergy(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill) {
-    const { receptors } = correspSummoners;
-    receptors.forEach((receptor: Summoner) => {
-      receptor.summon.stats.lifepoints -= emittor.summon.stats.att * skill.coeff - receptor.summon.stats.def;
-    });
+  updateLegacyEnergy(emittor: Summoner, receptor: Summoner, skill: Skill) {
+    receptor.legacyEnergy = 300;
+    receptor.legacyEnergy -= receptor.legacyEnergy * (skill.addCost / 100);
   }
 }
