@@ -28,6 +28,7 @@ export class Davinci extends LegendSkills {
         this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       case 3:
+        this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       default:
     }

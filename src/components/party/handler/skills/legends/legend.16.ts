@@ -28,6 +28,7 @@ export class Corday extends LegendSkills {
         this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       case 3:
+        this.skillCalculator.dmgTo(correspSummoners.emittor, correspSummoners.receptors[0], skill);
         break;
       default:
     }

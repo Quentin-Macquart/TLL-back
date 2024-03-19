@@ -1,5 +1,4 @@
 // SKILL HANDLER (facilitate imports)
-export * from './skills/summoners.handler';
 export * from './skills/skills.handler';
 
 // BOARD HANDLER (facilitate imports)
@@ -29,3 +28,13 @@ export * from './skills/legends/legend.18';
 export * from './skills/legends/legend.19';
 export * from './skills/legends/legend.20';
 export * from './skills/legends/legend.21';
+
+export * from './skills/summoners/summoner.factory';
+export * from './skills/summoners/summoner-skills.sample';
+export * from './skills/summoners/summoner.1';
+export * from './skills/summoners/summoner.2';
+export * from './skills/summoners/summoner.3';
+export * from './skills/summoners/summoner.4';
+export * from './skills/summoners/summoner.5';
+export * from './skills/summoners/summoner.6';
+export * from './skills/summoners/summoner.7';

@@ -27,6 +27,7 @@ export class Morgane extends LegendSkills {
         this.skillCalculator.inflictStatus(correspSummoners.receptors[0], skill);
         break;
       case 3:
+        this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       default:
     }

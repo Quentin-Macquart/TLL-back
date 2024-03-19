@@ -40,27 +40,6 @@ export class PartyFactory {
    * @returns {Party} The party with updated summoner statistics.
    */
   manageStatistics(party: Party, body: DynamicStatistics): void {
-    const { emittor, receptors } = this.getEmittorAndReceptors(party, body);
-    this.skillsHandler.manage({ emittor, receptors }, body);
-  }
-
-  /**
-   * Retrieves the corresponding emittor and receptor summoners based on a party and dynamic statistics.
-   * @param {Party} party The party to search within.
-   * @param {DynamicStatistics} body The dynamic statistics containing relevant data.
-   * @returns An object containing the emittor summoner and an array of receptor summoners.
-   */
-  getEmittorAndReceptors(
-    party: Party,
-    body: DynamicStatistics,
-  ): { emittor: Summoner; receptors: Summoner[] } {
-    const emittor: Summoner = party.partySummoners.filter((summoner: Summoner) => {
-      return summoner.id === body.from;
-    })[0];
-
-    const receptors: Summoner[] = party.partySummoners.filter((summoner: Summoner) => {
-      return body.to.includes(summoner.id);
-    });
-    return { emittor, receptors };
+    this.skillsHandler.manage(body, party);
   }
 }

@@ -1,5 +1,7 @@
 import { Summoner } from '@app/components/summoner/DAL/models';
 import { Skill } from '@app/components/legend/DAL/models';
+import { Constants } from '@app/shared/utils/constants/constants';
+import { Board } from '@app/components/party/DAL/models';
 
 export class SkillCalculator {
   /**
@@ -15,7 +17,7 @@ export class SkillCalculator {
     receptor.summon.stats.lifepoints = 5000;
 
     // TO KEEP
-    const isStealthActive = emittor.summon.status.some(status => status.status === 'furtive');
+    const isStealthActive = emittor.summon.status.some(status => status.status === 'stealth');
 
     switch (dmgType) {
       // Applicate damage to receptor in terms of the current number of the case
@@ -104,7 +106,7 @@ export class SkillCalculator {
    * @param {Skill} skillUsed - The skill that triggers the speed update.
    */
   updateSpeed(emittor: Summoner, skillUsed: Skill): void {
-    emittor.summon.stats.speed += skillUsed.addCost;
+    emittor.summon.stats.speed += skillUsed.coeff * emittor.summon.stats.speed;
   }
 
   /**
@@ -153,7 +155,7 @@ export class SkillCalculator {
    */
   reduceLegacyEnergy(receptor: Summoner, skill: Skill): void {
     receptor.legacyEnergy = 300;
-    receptor.legacyEnergy -= receptor.legacyEnergy * (skill.addCost / 100);
+    receptor.legacyEnergy -= receptor.legacyEnergy * skill.addCost;
   }
 
   /**
@@ -163,5 +165,21 @@ export class SkillCalculator {
    */
   addLegacyEnergy(emittor: Summoner, skill: Skill): void {
     emittor.legacyEnergy += skill.addCost;
+  }
+
+  /**
+   * Reveal one case on the board
+   * @param {Board} board
+   * @param {string} caseName
+   */
+  revealOneCase(board: Board, caseName: string) {
+    if (board) {
+      const caseLetter: string = caseName.split('')[0];
+      const caseNumber: number = parseInt(caseName.split('')[1], 10);
+
+      const possibleLines: string[] = Constants.ALPHABET;
+      const currentIndex = possibleLines.findIndex((letter: string) => letter === caseLetter);
+      board[currentIndex][caseNumber - 1].visible = true;
+    }
   }
 }

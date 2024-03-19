@@ -15,4 +15,5 @@ export interface DynamicStatistics {
   from: number;
   skillNumb: number;
   to: number[];
+  case?: string;
 }

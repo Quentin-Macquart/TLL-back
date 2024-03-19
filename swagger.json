@@ -1104,6 +1104,10 @@
             "items": {
               "type": "number"
             }
+          },
+          "case": {
+            "type": "number",
+            "required": false
           }
         }
       },

@@ -1,7 +1,7 @@
-import { LegendSkills, LegendFactory } from '@app/components/party/handler';
+import { LegendSkills, LegendFactory, SummonerSkills, SummonerFactory } from '@app/components/party/handler';
 import { Summoner } from '@app/components/summoner/DAL/models';
 import { Skill } from '@app/components/legend/DAL/models';
-import { DynamicStatistics } from '@app/components/party/DAL/models';
+import { DynamicStatistics, Party } from '@app/components/party/DAL/models';
 import { logger } from '@app/shared/utils/logger';
 
 export class SkillsHandler {
@@ -12,35 +12,56 @@ export class SkillsHandler {
    * @param {DynamicStatistics} body - An object containing the statistics that influence the execution of the skill, including the skill number and whether it's a legend skill.
    * @returns {{emittor: Summoner; receptors: Summoner[]}} The correspSummoners object potentially modified with updated statistics after skill activation.
    */
-  public manage(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, body: DynamicStatistics) {
+  public manage(body: DynamicStatistics, party: Party): Party {
+    const { emittor, receptors } = this.getEmittorAndReceptors(party, body);
+
     const { skillNumb, isLegendSkill } = body;
-    const skillsList: Skill[] = isLegendSkill
-      ? correspSummoners.emittor.summon.skills
-      : correspSummoners.emittor.skills;
+    const skillsList: Skill[] = isLegendSkill ? emittor.summon.skills : emittor.skills;
     const skillUsed = skillsList.find((skill: Skill) => skill.number === skillNumb);
 
     if (skillUsed) {
-      this.logSkillUsage(correspSummoners.emittor, skillUsed);
+      this.logSkillUsage(emittor, skillUsed, isLegendSkill);
       if (isLegendSkill) {
-        const legendSkills: LegendSkills = LegendFactory.createLegend(correspSummoners.emittor.summon.id);
-        legendSkills.castSkill(correspSummoners, skillUsed);
+        const legendSkills: LegendSkills = LegendFactory.createLegend(emittor.summon.id);
+        legendSkills.castSkill({ emittor, receptors }, skillUsed, party.partyBoard, body.case);
       } else {
-        // this.summonerSkill.activate(correspSummoners, skillUsed);
+        const summonerSkills: SummonerSkills = SummonerFactory.createSummoner(emittor.id);
+        summonerSkills.castSkill({ emittor, receptors }, skillUsed, party.partyBoard, body.case);
       }
     }
-    return correspSummoners;
+    return party;
   }
 
   /**
-   * Logs the usage of a skill by the emittor. This function constructs a log message indicating which summoner (emittor) used which skill, and logs it for monitoring and debugging purposes.
+   * Retrieves the corresponding emittor and receptor summoners based on a party and dynamic statistics.
+   * @param {Party} party The party to search within.
+   * @param {DynamicStatistics} body The dynamic statistics containing relevant data.
+   * @returns An object containing the emittor summoner and an array of receptor summoners.
+   */
+  getEmittorAndReceptors(
+    party: Party,
+    body: DynamicStatistics,
+  ): { emittor: Summoner; receptors: Summoner[] } {
+    const emittor: Summoner = party.partySummoners.filter((summoner: Summoner) => {
+      return summoner.id === body.from;
+    })[0];
+
+    const receptors: Summoner[] = party.partySummoners.filter((summoner: Summoner) => {
+      return body.to.includes(summoner.id);
+    });
+    return { emittor, receptors };
+  }
+
+  /**
+   * Logs the usage of a skill by the emilegendttor. This function constructs a log message indicating which summoner (emittor) used which skill, and logs it for monitoring and debugging purposes.
    *
    * @param {Summoner} emittor - The summoner who is using the skill.
    * @param {Skill} skillUsed - The skill that is being used by the emittor.
    */
-  public logSkillUsage(emittor: Summoner, skillUsed: Skill) {
-    const user = emittor.summon
+  public logSkillUsage(emittor: Summoner, skillUsed: Skill, isLegendSkill: boolean) {
+    const user = isLegendSkill
       ? `${emittor.summon.shortcut} (${emittor.summon.name})`
       : `La legacy ${emittor.name}`;
-    logger.info(`${user} utilise sa compétence ${skillUsed.number} : ${skillUsed.name}`);
+    logger.warn(`${user} utilise sa compétence ${skillUsed.number} : ${skillUsed.name}`);
   }
 }

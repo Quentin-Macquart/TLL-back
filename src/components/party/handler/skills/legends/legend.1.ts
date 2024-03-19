@@ -32,6 +32,7 @@ export class Arthur extends LegendSkills {
         this.skillCalculator.reduceLegacyEnergy(correspSummoners.receptors[0], skill);
         break;
       case 3:
+        this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       default:
     }

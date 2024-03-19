@@ -28,6 +28,7 @@ export class Miyamoto extends LegendSkills {
         // this.skillCalculator.additionalDmgWithStatus(correspSummoners.receptors[0], skill]);
         break;
       case 3:
+        this.skillCalculator.grantStatus(correspSummoners.emittor, skill);
         break;
       default:
     }

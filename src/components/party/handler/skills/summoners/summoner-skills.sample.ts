@@ -2,19 +2,12 @@ import { Skill } from '@app/components/legend/DAL/models';
 import { Board } from '@app/components/party/DAL/models';
 import { Summoner } from '@app/components/summoner/DAL/models';
 
-export class LegendSkills {
+export class SummonerSkills {
   id: number;
 
   constructor(id: number) {
     this.id = id;
   }
-
-  /**
-   * Legend ultimate calculated
-   * @param correspSummoners
-   * @param skill
-   */
-  ultimate(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill): void {}
 
   /**
    * Executes the skill effect based on the skill's unique identifier. This function determines the specific actions to take for each skill, such as applying damage, altering stats, or other game mechanics, based on the skill number. It uses a switch statement to differentiate between the behaviors of various skills.
@@ -26,7 +19,7 @@ export class LegendSkills {
   public castSkill(
     correspSummoners: { emittor: Summoner; receptors: Summoner[] },
     skill: Skill,
-    party?: Board,
+    board?: Board,
     caseName?: string,
   ): void {}
 }

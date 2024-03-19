@@ -11,6 +11,24 @@ export class Odin extends LegendSkills {
   }
 
   /**
+   * Legend ultimate calculated
+   * @param correspSummoners
+   * @param skill
+   */
+  ultimate(correspSummoners: { emittor: Summoner; receptors: Summoner[] }, skill: Skill): void {
+    const [receptor] = correspSummoners.receptors;
+    const halfEnemyAtt: number = receptor.summon.stats.att / 2;
+    const halfLegacyEnergy: number = receptor.legacyEnergy / 2;
+
+    // Divide enemy atq per 2
+    this.skillCalculator.reduceLegacyEnergy(correspSummoners.receptors[0], skill);
+    // this.skillCalculator.directDmgTo(
+    //   receptor,
+    //   halfEnemyAtt + halfLegacyEnergy + correspSummoners.emittor.summon.stats.att,
+    // );
+  }
+
+  /**
    * Executes the skill effect based on the skill's unique identifier. This function determines the specific actions to take for each skill, such as applying damage, altering stats, or other game mechanics, based on the skill number. It uses a switch statement to differentiate between the behaviors of various skills.
    *
    * @param {{ emittor: Summoner; receptors: Summoner[] }} correspSummoners - An object containing the emittor and the receptors within the context of the current action. The emittor is the summoner performing the action (using the skill), and the receptors are the summoners who are affected by the skill.
@@ -32,6 +50,7 @@ export class Odin extends LegendSkills {
         );
         break;
       case 3:
+        this.ultimate(correspSummoners, skill);
         break;
       default:
     }
